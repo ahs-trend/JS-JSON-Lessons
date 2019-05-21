@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>JavaScript Table Thing</title>
+		<script>
+			function doButton() 
+            { 
+				var button = document.getElementById('TheButton');
+
+				button.innerHTML = "Button Done";		
+			}
+		</script>
+		<style>
+			button { 
+				/* stylized to match navigation menu */
+				font-size: 1.1em;
+				background-color: #EBF5FF; /* pale bluish white */
+				color: #4312AE; /* dark blue */
+				border: 2px solid black;
+				box-shadow: 4px 4px 4px #999999; /* doesn't work in all browsers */	
+			}
+			button:hover, button:focus, button:active { 
+				/* swap colors */
+				color: #EBF5FF; /* pale bluish white */
+				background-color: #4312AE; /* dark blue */			
+				cursor: pointer; /* displays a hand */
+			}
+		</style>
+  </head>
+  <body>
+		<h1>JavaScript Table Manipulation - Part 2</h1>
+		
+		<table id="BigTable">
+			<thead>
+				<th>Name</th>
+				<th>Value</th>
+			</thead>	
+			<tr>
+				<td>One</td>
+				<td>Two</td>
+			</tr>
+			<tr>
+				<td>Three</td>
+				<td>Four</td>
+			</tr>
+        </table>
+
+        <button id="TheButton" onclick="doButton()">Do Button</button> 
+		
+		</main>
+  </body>
+</html>

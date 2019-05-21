@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+  <head>
+   <title>UC Davis Buildings</title>
+   <script>
+
+            // fake JSON call
+            function getJSONMarkers() {
+                const markers = [
+                    {
+                    name:  "Bainer Hall",
+                    location: [38.53719665659, -121.7532517895]
+                    }
+                ];
+                return markers;
+            }
+
+            function loadMap() {
+            // Initialize Google Maps
+                const mapOptions = {
+                    center:new google.maps.LatLng(38.53719665659, -121.753251789),
+                    zoom: 11
+                }
+                const map = new google.maps.Map(document.getElementById("map"), mapOptions);
+
+                // Load JSON Data
+                const hallMarkers = getJSONMarkers();
+
+                // Initialize Google Markers
+                for(hall of hallMarkers) {
+                    let marker = new google.maps.Marker({
+                    map: map,
+                    position: new google.maps.LatLng(hall.location[0], hall.location[1]),
+                    title: hall.name
+                    })
+                }
+            }
+        </script>
+        <script src = "https://maps.googleapis.com/maps/api/js"></script>
+    </head>
+
+  <body onload = "loadMap()">
+    <h2>Bainer Hall</h2>
+    <div id = "map" style = "width:640px; height:480px;"></div>
+   </body>
+</html>

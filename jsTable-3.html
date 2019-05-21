@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>JavaScript Table Thing</title>
+		<script>
+            var index1 = 0;
+            var index2 = 1;
+			function doButton() { 
+				var button = document.getElementById('TheButton');
+
+				button.innerHTML = "Button Done";
+
+                var bigTable = document.getElementById("BigTable");
+
+                var row = bigTable.insertRow(-1);
+                var cell1 = row.insertCell(0);
+                var cell2 = row.insertCell(1);
+                cell1.id = "lastCell";
+                cell1.innerHTML = "Cell " + index1;
+                cell2.innerHTML = "Cell " + index2*index2;
+
+                index1 ++;
+                index2 += 2;
+			}
+		</script>
+		<style>
+            #lastCell {
+                color: red;
+                background-color: yellow;
+            }
+			button { 
+				/* stylized to match navigation menu */
+				font-size: 1.1em;
+				background-color: #EBF5FF; /* pale bluish white */
+				color: #4312AE; /* dark blue */
+				border: 2px solid black;
+				box-shadow: 4px 4px 4px #999999; /* doesn't work in all browsers */	
+			}
+			button:hover, button:focus, button:active { 
+				/* swap colors */
+				color: #EBF5FF; /* pale bluish white */
+				background-color: #4312AE; /* dark blue */			
+				cursor: pointer; /* displays a hand */
+			}
+		</style>
+  </head>
+  <body>
+		<h1>JavaScript Table Manipulation - Part 2</h1>
+		
+		<table id="BigTable">
+			<thead>
+				<th>Name</th>
+				<th>Value</th>
+			</thead>	
+			</table>
+
+			<button id="TheButton" onclick="doButton()">Do Button</button> 
+		
+		</main>
+  </body>
+</html>

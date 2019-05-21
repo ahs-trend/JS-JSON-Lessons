@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>JavaScript JSON Basics</title>
+        <script>
+            function Get(yourUrl){
+                var Httpreq = new XMLHttpRequest(); // a new request
+                Httpreq.open("GET",yourUrl,false);
+                Httpreq.send(null);
+                return Httpreq.responseText;          
+            }
+
+            function getChildren(json) {
+                var result = [];
+                for (var key in json) {
+                    result.push(key);
+                }
+                return result;
+            }
+
+            function isObject(json) {
+                return typeof json == "object";
+            }
+
+            function getAllChildren(json, root) {
+
+                root = root || "";
+                if (root.length > 0) {
+                    root += ".";
+                }
+                var result = [];
+                var childs = getChildren(json);
+                for (var i = 0; i < childs.length; i++) {
+                    result.push(root + childs[i]);
+                    if (isObject(json[childs[i]])) {
+                        var subchilds = getAllChildren(json[childs[i]], root + childs[i]);
+                        for (var j = 0; j < subchilds.length; j++) {
+                            result.push(subchilds[j]);
+                        }            
+                    }
+                }
+
+                return result;
+            }
+
+            function loadJSON()
+            {
+                var json = Get("https://jsonplaceholder.typicode.com/todos/1");
+                var string1 = JSON.parse(json);
+                var outString = "hello???";
+                var status = "";
+                if( isObject(string1))
+                {
+                    outString = "";
+                    status = "Object";
+
+                    var theString = getChildren();
+                    for( x in theString )
+                    {
+                        outString += x + "<br>";
+                        status += " .";
+                    }
+                }
+                else
+                {
+                    outString = string1;
+                    status = "Not object";
+                }
+
+                var paragraph = document.getElementById('TheP');
+                var paragraph2 = document.getElementById('TheP2');
+                paragraph.innerHTML = status;
+                paragraph2.innerHTML = outString;
+            }
+		</script>
+		<style>
+		</style>
+    </head>
+    <body onload="loadJSON()">
+		<h1>JavaScript JSON Basics - Part 1</h1>
+		
+        <p id="TheP"><b>This is a paragraph</b></p>
+        <p id="TheP2"><b>This is not a paragraph</b></p>
+  </body>
+</html>
