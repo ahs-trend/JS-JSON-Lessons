@@ -6,25 +6,19 @@
 		<script>
 			var bigTable;
 			var theP;
-			var objLevel = 0;
 			var tableName = "BigTable";
 			var theDiv;
 
-			var theURL = "https://my-json-server.typicode.com/DidntGoBoom/JSONbasin/things/1";
-			// theURL = "http://ip-api.com/json/54.148.84.95";
-			// theURL = "https://jsonplaceholder.typicode.com/todos/1";
-			// theURL = "http://ahs-s12-tc-01:3000/US";
-			// theURL = "http://localhost:3000/US";
+			var theURL = "https://my-json-server.typicode.com/DidntGoBoom/JSONbasin/profile/";
 
 			function loadJSON() { 
-				bigTable = document.getElementById('BigTable' + objLevel);
+				bigTable = document.getElementById('BigTable');
 				theP = document.getElementById('TheP');
 				theDiv = document.getElementById("tablesThing");
 
 				var Httpreq = new XMLHttpRequest(); // a new request
 				Httpreq.open("GET", theURL, false);
 				Httpreq.send(null);
-				// alert( Httpreq.responseText);   
 				message = JSON.parse(Httpreq.responseText);
 				var thePmessage = "";
 
@@ -33,34 +27,11 @@
 				for( x in message)
 				{
 					thePmessage += x + "<br>";
-					if(typeof x == "object")
-					{
-						name = "Object";
-						value = "Thingy Stuff";
-						doAddRow(name, value);
-						parseJSONObject(x);
-					}
-					else
-					{
-						name = x;
-						value = message[x];
-						doAddRow(name, value);
-					}
+                    name = x;
+                    value = message[x];
+                    doAddRow(name, value);
 				}
 				theP.innerHTML = thePmessage;
-			}
-
-			function parseJSONObject(theMessage)
-			{
-				objLevel ++;
-				
-				theDiv.innerHTML += "hello????"; //"<table id='xyz'></table>";
-				theTab = document.getElementById('xyz');
-				var theRow = theTab.insertRow(-1);
-				var theCell = theRow.insertCell(0);
-				theCell.innerHTML = "???";
-				document.getElementById('theP2').innerHTML = "<b>Hi</b>";
-				
 			}
 
 			function doAddRow(name, value)
@@ -70,7 +41,6 @@
 				var cell2 = row.insertCell(1);
 				cell1.innerHTML = name;
 				cell2.innerHTML = value;
-				// bigTable.innerHTML = inString;
 			}
 		</script>
 		<style>
@@ -94,7 +64,7 @@
 		<h1>JavaScript Table Manipulation</h1>
 		
 		<div id="tablesThing">
-			<table id="BigTable0" border = "1">
+			<table id="BigTable" border = "1">
 				<thead>
 					<th>Name</th>
 					<th>Value</th>
@@ -103,10 +73,6 @@
 		</div>
         
 		<p id="TheP">
-			not the p
-		</p>
-
-		<p id="TheP2">
 			not the p
 		</p>
 
