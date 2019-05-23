@@ -13,16 +13,18 @@
 			var theURL = "https://my-json-server.typicode.com/DidntGoBoom/JSONbasin/things/1";
 			// theURL = "http://ip-api.com/json/54.148.84.95";
 			// theURL = "https://jsonplaceholder.typicode.com/todos/1";
-			// theURL = "http://ahs-s12-tc-01:3000/US";
+			theURL = "https://devdata.osisoft.com/piwebapi/attributes/F1AbEIRAQC7zjPUOfBqai218IAwLwRYBzrU5xGpRgANOhgILgNHVoaY0WblkYU47fwQIZhAUElTUlYxXFVOSVZFUlNJVElFU1xVQyBEQVZJU1xCVUlMRElOR1NcQkFJTkVSIEhBTEx8TE9OR0lUVURF";
 			// theURL = "http://localhost:3000/US";
 
 			function loadJSON() { 
 				bigTable = document.getElementById('BigTable' + objLevel);
 				theP = document.getElementById('TheP');
+				theP2 = document.getElementById('TheP2');
 				theDiv = document.getElementById("tablesThing");
 
 				var Httpreq = new XMLHttpRequest(); // a new request
-				Httpreq.open("GET", theURL, false);
+				// Httpreq.setRequestHeader("Authorization", "Basic " + btoa("webapiuser:!try3.14webapi!"));
+				Httpreq.open("GET", theURL, true, "webapiuser", "!try3.14webapi!");
 				Httpreq.send(null);
 				// alert( Httpreq.responseText);   
 				message = JSON.parse(Httpreq.responseText);
@@ -44,8 +46,13 @@
 					{
 						name = x;
 						value = message[x];
+						if( name == "Longitude")
+						{
+							theP2 = value;
+						}
 						doAddRow(name, value);
 					}
+					theP.innerHTML = thePmessage;
 				}
 				theP.innerHTML = thePmessage;
 			}
