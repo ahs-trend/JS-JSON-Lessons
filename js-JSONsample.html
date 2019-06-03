@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+	<title>JavaScript Table Thing</title>
+		<script type="text/javascript" src="base64.js"></script>
+		<script>
+			var theURL = "https://my-json-server.typicode.com/DidntGoBoom/JSONbasin/songs";
+            var theTable;
+            var thePara;
+
+            function parseTheMessage(theMess)
+            {
+                for(part in theMess)
+                {
+                    if( typeof theMess[part] == "object")
+                    {
+                        parseTheMessage(theMess[part]);
+                    }
+                    else
+                    {
+                        thePara.innerHTML += part + ": " + theMess[part] + "<br>";
+                    }
+                }
+            }
+
+			function loadJSON() { 
+				theTable = document.getElementById("BigT");
+                thePara = document.getElementById("BigP");
+
+				var Httpreq = new XMLHttpRequest(); // a new request
+                Httpreq.open("GET", theURL, false);
+				Httpreq.send(null);
+
+				alert( Httpreq.responseText);   
+				message = JSON.parse(Httpreq.responseText);
+
+                parseTheMessage(message);
+			}
+		</script>
+		<style>
+			button { 
+				/* stylized to match navigation menu */
+				font-size: 1.1em;
+				background-color: #EBF5FF; /* pale bluish white */
+				color: #4312AE; /* dark blue */
+				border: 2px solid black;
+				box-shadow: 4px 4px 4px #999999; /* doesn't work in all browsers */	
+			}
+			button:hover, button:focus, button:active { 
+				/* swap colors */
+				color: #EBF5FF; /* pale bluish white */
+				background-color: #4312AE; /* dark blue */			
+				cursor: pointer; /* displays a hand */
+			}
+		</style>
+  </head>
+  <body>
+		<h1>JavaScript JSON Stuff</h1>
+        
+        <table id="BigT"></table>
+
+        <p id="BigP"></p>
+
+		<button id="TheButton" onclick="loadJSON()">Show alert</button> 
+		
+		</main>
+  </body>
+</html>

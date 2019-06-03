@@ -1,0 +1,41 @@
+Getting to be way too many files in here ... time for some semblance of order
+
+base64.js - convenience function for building authentication strings
+GoogleMapsExample.html - self explanatory
+
+javascript.html = source for many of the functions within - from Intro class years ago
+
+js-bigthing.html - intended to be a grand unified COE (Code of Everything)
+
+The next files start a sequence of JSON lessons.  The -start files are the student
+starter code, the -sol files are the solutions.
+
+jsJSON-1.html
+jsJSON-1-start.html
+jsJSON-2.html
+
+Code for reading NV pairs from JSON, starter puts values into a paragraph, solution 
+populates a table.
+
+js-JSONsample.html
+js-JSONsample-sol.html
+
+Miscellaneous small files - attempts at SSCEs (not all successful)
+js-LBT.html
+js-LBTmin.html
+
+jsonBasics-1.html
+jsonBasics-1-start.html
+jsonBasics-3.html
+
+Series of JavaScript table manipulation files, with starters and solutions
+jsTable.html
+jsTable-1.html
+jsTable-1-start.html
+jsTable-1-xyz.html
+jsTable-2.html
+jsTable-2-start.html
+jsTable-3.html
+jsTable-3-start.html
+jsTable-4.html
+jsTest.html
