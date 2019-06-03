@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+	<title>JavaScript Table Thing</title>
+		<script type="text/javascript" src="base64.js"></script>
+		<script>
+			var theURL = "https://my-json-server.typicode.com/DidntGoBoom/JSONbasin/";
+			theURL = "http://ergast.com/api/f1/2004/1/results.json";
+			var domain = ""; // with JSONbasin either profile, songs or db - blank otherwise
+
+			var theTable;
+			var theList;
+			var row;
+			var thePara;
+			var firstTime = true;
+			var theCap;
+
+            function parseTheMessage(theMess)
+            {
+                for(part in theMess)
+                {
+					if( firstTime )
+					{
+						theCap = part;
+						firstTime = false;
+					}
+                    if( typeof theMess[part] == "object")
+                    {
+						var oldList = theList;
+                        var thingie = document.createElement("li");
+                        thingie.innerText = part;
+                        theList.appendChild(thingie);
+                        theList = document.createElement("ul");
+						parseTheMessage(theMess[part]);
+						oldList.appendChild(theList);
+						theList = oldList;
+                    }
+                    else
+                    {
+                        var thingie = document.createElement("li");
+                        thingie.innerText = theMess[part];
+                        theList.appendChild(thingie);
+                    }
+                }
+            }
+
+			function loadJSON() { 
+				theList = document.getElementById("BigL");
+                thePara = document.getElementById("BigP");
+
+				var Httpreq = new XMLHttpRequest(); // a new request
+				Httpreq.open("GET", theURL+domain, false);
+				Httpreq.send(null);
+
+				alert( Httpreq.responseText);   
+				message = JSON.parse(Httpreq.responseText);
+
+                parseTheMessage(message);
+			}
+		</script>
+		<style>
+			button { 
+				/* stylized to match navigation menu */
+				font-size: 1.1em;
+				background-color: #EBF5FF; /* pale bluish white */
+				color: #4312AE; /* dark blue */
+				border: 2px solid black;
+				box-shadow: 4px 4px 4px #999999; /* doesn't work in all browsers */	
+			}
+			button:hover, button:focus, button:active { 
+				/* swap colors */
+				color: #EBF5FF; /* pale bluish white */
+				background-color: #4312AE; /* dark blue */			
+				cursor: pointer; /* displays a hand */
+			}
+		</style>
+  </head>
+  <body>
+		<h1>JavaScript JSON Stuff</h1>
+
+		<ul id="BigL"></ul>
+        
+        <table id="BigT"></table>
+
+        <p id="BigP"></p>
+
+		<button id="TheButton" onclick="loadJSON()">Show alert</button> 
+		
+		</main>
+  </body>
+</html>
