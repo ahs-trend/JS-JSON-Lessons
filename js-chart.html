@@ -1,0 +1,54 @@
+<html>
+    <head>
+        <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+        <script>
+            var chart;
+
+            function doLoading()
+            {
+                var ctx = document.getElementById('chartCanvas').getContext('2d');
+                chart = new Chart(ctx, 
+                    {
+                        // The type of chart we want to create
+                        type: 'line',
+
+                        // The data for our dataset
+                        data: {
+                            labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
+                            datasets: [
+                                {
+                                    label: 'My First dataset',
+                                    backgroundColor: 'rgb(255, 99, 132)',
+                                    borderColor: 'rgb(132, 99, 255)',
+                                    data: [0, 10, 5, 2, 20, 30, 45]
+                                },
+                                {
+                                    label: 'My Other dataset',
+                                    backgroundColor: 'rgb(55, 9, 32)',
+                                    borderColor: 'rgb(32, 9, 55)',
+                                    data: [0, 5, 8, 2, 12, 50, 15]
+                                }
+                            ]
+                        },
+
+                            // Configuration options go here
+                            options: {}
+                    }
+                );
+            }
+            function doClicking()
+            {
+                chart.data.labels.push("Next Month");
+                chart.data.datasets.forEach((dataset) => {
+                    dataset.data.push(44);
+                });
+                chart.update();
+            }
+        </script>
+    </head>
+    <body onload=doLoading()>
+        Huh??<br>
+        <canvas id="chartCanvas" width=400 height="400"></canvas>
+        <button onclick="doClicking()">Push Me</button>
+    </body>
+</html>
