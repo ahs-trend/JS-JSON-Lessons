@@ -1,0 +1,97 @@
+<html>
+    <head>
+        <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+        <script>
+            var chart;
+            var months = Array(12).fill("");
+            var temps = Array(12).fill(0);
+            var lotemps = Array(12).fill(0);
+
+            function getTempData()
+            {
+                var theURL = "https://my-json-server.typicode.com/DidntGoBoom/JSONbasin/hilotemp/";
+    			// theURL = "http://localhost:3000/US";
+
+				var Httpreq = new XMLHttpRequest(); // a new request
+				Httpreq.open("GET", theURL, false);
+				Httpreq.send(null);
+
+				alert( Httpreq.responseText);   
+				message = JSON.parse(Httpreq.responseText);
+
+                var i = 0;
+                for( month in message)
+                {
+                    if( typeof message[month] == "object")
+                    {
+                        months[i] = month;
+                        var mess1 = message[month];
+                        for( part in mess1)
+                        {
+                            if( part == "High")
+                            {
+                                temps[i] = mess1[part];
+                            }
+                            else if( part == "Low")
+                            {
+                                lotemps[i] = mess1[part];
+                            }
+                            console.log(temps[i] + " " + lotemps[i]);
+                       }
+                    }
+                    i++;
+                }
+            }
+
+            function doLoading()
+            {
+                getTempData();
+
+                var ctx = document.getElementById('chartCanvas').getContext('2d');
+                chart = new Chart(ctx, 
+                    {
+                        // The type of chart we want to create
+                        type: 'line',
+
+                        // The data for our dataset
+                        data: {
+                            datasets: [
+                            {
+                                    label: 'High Temperatures',
+                                    // backgroundColor: 'rgb(55, 9, 32)',
+                                    borderColor: 'rgb(32, 9, 55)',
+                                    data: [0, 5, 8, 2, 12, 50, 15]
+                                },
+                                {
+                                    label: 'Low Temperatures',
+                                    // backgroundColor: 'rgb(255, 99, 132)',
+                                    borderColor: 'rgb(132, 99, 255)',
+                                    data: [0, 5, 8, 2, 12, 50, 15]
+                                }
+                            ]
+                        },
+
+                        // Configuration options go here
+                        options: {}
+                    }
+                );
+                chart.canvas.parentNode.style.height = '128px';
+                chart.canvas.parentNode.style.width = '128px';
+                chart.data.labels = months;
+                chart.update();
+            }
+
+            function doClicking()
+            {
+                chart.data.datasets[0].data = temps;
+                chart.data.datasets[1].data = lotemps;
+                chart.update();
+            }
+        </script>
+    </head>
+    <body onload=doLoading()>
+        Huh??<br>
+        <canvas id="chartCanvas" width=400 height="400"></canvas>
+        <button onclick="doClicking()">Push Me</button>
+    </body>
+</html>
